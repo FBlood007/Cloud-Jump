@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public bool isGrounded = false;
     public float jumpVelocity = 5f;
     public float distance = 0f;
-    public float maxMaxxHoldJumpTime = 0.4f;
+    public float maxMaxxHoldJumpTime = 0.2f;
     public bool isTouched = false;
     public float maxTouchedJumpTime = 0.2f;
     public float touchJumpTimer = 0.0f;
@@ -99,8 +99,10 @@ public class Player : MonoBehaviour
 
         if (isGrounded)
         {
-            float velocityRatio = velocity.x / maxXVelocity;
-            acceleration = maxAcceleration * (1 - velocityRatio);
+            float velocityRatio =velocity.x / maxXVelocity;
+            acceleration = 0.5f * maxAcceleration * (1 - velocityRatio);
+            maxTouchedJumpTime = maxMaxxHoldJumpTime * velocityRatio;
+
 
             velocity.x += acceleration * Time.fixedDeltaTime;
             if (velocity.x >= maxXVelocity)

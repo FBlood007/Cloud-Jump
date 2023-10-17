@@ -21,9 +21,12 @@ public class Parallax : MonoBehaviour
         Vector2 pos = transform.position;
         pos.x -= velocityReal * Time.fixedDeltaTime;
 
+        if(gameObject.tag != "Background")
+        {
+            if (pos.x <= -25)
+            pos.x = 25; 
 
-        if (pos.x <= -25)
-            pos.x = 45; 
+        }
 
         transform.position = pos;
 
